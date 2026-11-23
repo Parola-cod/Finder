@@ -301,15 +301,16 @@ function calculate() {
 
     <div class="client-header">
 
-        <h3>Scheda Cliente</h3>
-
-        <button
+		<button
             class="btn btn-small"
             onclick="location.reload()">
 
             Nuova Analisi
 
         </button>
+        <h3>Scheda Cliente</h3>
+
+        
 
     </div>
 
