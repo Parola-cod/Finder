@@ -41,11 +41,7 @@ const products = {
 
         features: [
 
-            "WooCommerce",
-            "Shopify",
-            "Magento",
-            "Prestashop",
-            "Ebay",
+            
 
             "Collection",
             "Fresh",

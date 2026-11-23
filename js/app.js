@@ -297,16 +297,29 @@ function calculate() {
     html += `
             </div>
 
-            <div>
+           <div>
 
-                <h3>Scheda Cliente</h3>
+    <div class="client-toolbar">
 
-                <ul>
-                    <li>Aggregatore: ${answers.agg || "-"}</li>
-                    <li>CMS: ${answers.cms || "-"}</li>
-                    <li>Resi: ${answers.resi || "NO"}</li>
-                </ul>
+        <button
+            class="btn btn-small"
+            onclick="location.reload()">
 
+            Nuova Analisi
+
+        </button>
+
+    </div>
+
+    <h3>Scheda Cliente</h3>
+
+    <ul>
+        <li>Aggregatore: ${answers.agg || "-"}</li>
+        <li>CMS: ${answers.cms || "-"}</li>
+        <li>Resi: ${answers.resi || "NO"}</li>
+    </ul>
+
+</div>
             </div>
 
         </div>
@@ -347,17 +360,7 @@ function calculate() {
        NUOVA ANALISI
     ========================= */
 
-    html += `
-
-        <button
-            class="btn"
-            onclick="location.reload()">
-
-            Nuova Analisi
-
-        </button>
-
-    `;
+    
 
     document.getElementById("answers").style.display =
         "none";
