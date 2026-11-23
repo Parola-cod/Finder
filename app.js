@@ -299,20 +299,19 @@ function calculate() {
 
            <div>
 
-    <div class="client-header">
+    <div class="client-toolbar">
 
-		<button
+        <button
             class="btn btn-small"
             onclick="location.reload()">
 
             Nuova Analisi
 
         </button>
-        <h3>Scheda Cliente</h3>
-
-        
 
     </div>
+
+    <h3>Scheda Cliente</h3>
 
     <ul>
         <li>Aggregatore: ${answers.agg || "-"}</li>
