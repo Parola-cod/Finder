@@ -37,7 +37,7 @@ const products = {
     "EasySpedWeb": {
 
         desc:
-        "Piattaforma Web BRT.",
+        "Servizi disponibili :",
 
         features: [
 
@@ -77,7 +77,7 @@ const products = {
     "Return My Parcel": {
 
         desc:
-        "Gestione completa dei resi.",
+        "Servizi Disponibili :",
 
         features: [
 
