@@ -46,6 +46,29 @@ header{
 }
 
 /* =========================
+   FOOTER
+========================= */
+
+.footer{
+    width:100%;
+    text-align:center;
+    margin-top:50px;
+    padding:20px 0;
+    color:#666;
+    font-size:14px;
+}
+
+.footer-content{
+    width:100%;
+    text-align:center;
+}
+
+.footer-divider{
+    margin:0 8px;
+    color:#bdbdbd;
+}
+
+/* =========================
    CONTENITORE
 ========================= */
 
@@ -152,7 +175,35 @@ header{
 .prod ul{
     margin-bottom:0;
 }
+.product-badge{
 
+    display:inline-block;
+
+    background:#198754;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.solution-title{
+
+    margin:0;
+
+    color:#333;
+
+    font-size:32px;
+
+}
 /* =========================
    NOTE API
 ========================= */
@@ -184,6 +235,21 @@ header{
 
 .btn:hover{
     background:#b80000;
+}
+
+.btn-small{
+    padding:10px 18px;
+    font-size:14px;
+}
+
+/* =========================
+   TOOLBAR CLIENTE
+========================= */
+
+.client-toolbar{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:15px;
 }
 
 /* =========================
@@ -223,15 +289,12 @@ ul{
     text-align:center;
     transition:.2s;
     cursor:pointer;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,.06);
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
 .partner-card:hover{
     transform:translateY(-3px);
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.12);
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
 }
 
 .partner-card img{
@@ -273,8 +336,7 @@ ul{
     }
 
     .partner-grid{
-        grid-template-columns:
-        repeat(auto-fill,minmax(120px,1fr));
+        grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
     }
 
     .partner-card{
