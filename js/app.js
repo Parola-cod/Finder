@@ -228,7 +228,7 @@ function calculate() {
         html += `
 
             <p>
-                Integrazione tramite API BRT.
+                Servizi Disponibili con  API BRT :
             </p>
 
             ${createList(apiFeatures)}
