@@ -198,17 +198,25 @@ function calculate() {
 
     let html = `
 
-        <h2>✅ ${solution}</h2>
+        <div class="product-header">
 
-        <p>${reason}</p>
+    <span class="product-badge">
+        SOLUZIONE CONSIGLIATA
+    </span>
+
+    
+
+</div>
 
         <div class="grid">
 
             <div>
 
                 <div class="prod">
-
-                    <h3>${solution}</h3>
+<h2 class="solution-title">
+        ${solution}
+    </h2>
+                    
     `;
 
     /* =========================
@@ -365,8 +373,7 @@ function calculate() {
     document.getElementById("answers").style.display =
         "none";
 
-    document.getElementById("q").innerText =
-        "Analisi completata";
+    document.getElementById("q").innerText = "";
 
     document.getElementById("bar").style.width =
         "100%";

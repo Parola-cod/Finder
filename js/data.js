@@ -37,7 +37,7 @@ const products = {
     "EasySpedWeb": {
 
         desc:
-        "Piattaforma ecommerce BRT.",
+        "Piattaforma Web BRT.",
 
         features: [
 
@@ -221,7 +221,7 @@ const questions = [
 
     {
         key:"agg",
-        title:"Quale aggregatore utilizza il cliente?",
+        title:"Il cliente utilizza qualche aggregatore?",
         options:[
             "Nessuno",
             "ShippyPro",
@@ -237,7 +237,7 @@ const questions = [
 
     {
         key:"cms",
-        title:"Quale CMS utilizza il cliente?",
+        title:"Quale CMS / Marketplace utilizza il cliente?",
         options:[
             "WooCommerce",
             "Shopify",
