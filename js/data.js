@@ -13,7 +13,7 @@ const apiCompleta = [
     "Tracking",
     "Fermopoint",
     "PUDO",
-    "Pickup",
+    "ORM",
     "Notifiche",
     "Resi tramite API"
 ];
@@ -221,9 +221,9 @@ const questions = [
 
     {
         key:"agg",
-        title:"Il cliente utilizza qualche aggregatore?",
+        title:"Quale piattaforma software utilizza il cliente?",
         options:[
-            "Nessuno",
+            "Nessuna",
             "ShippyPro",
             "Qapla",
             "Sendcloud",
@@ -236,18 +236,24 @@ const questions = [
     },
 
     {
-        key:"cms",
-        title:"Quale CMS / Marketplace utilizza il cliente?",
-        options:[
-            "WooCommerce",
-            "Shopify",
-            "Magento",
-            "Prestashop",
-            "Ebay",
-            "CMS Proprietario",
-            "Altro CMS"
-        ]
-    },
+    key:"cms",
+    title:"Quale piattaforma utilizza il cliente? (CMS o Marketplace)",
+    options:[
+
+        "🛒 WooCommerce",
+        "🛒 Shopify",
+        "🛒 Magento",
+        "🛒 Prestashop",
+
+        "🏪 Amazon",
+        "🏪 Ebay",
+
+        "⚙️ CMS Proprietario",
+
+        "❓ Altro CMS / Marketplace"
+
+    ]
+},
 
     {
         key:"resi",

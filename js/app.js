@@ -43,7 +43,7 @@ function choose(value) {
     answers[questions[current].key] = value;
 
     // Aggregatore selezionato
-    if (current === 0 && value !== "Nessuno") {
+    if (current === 0 && value !== "Nessuna") {
 
         answers.cms = "N/A";
 
@@ -58,8 +58,8 @@ function choose(value) {
     if (
         current === 1 &&
         (
-            value === "CMS Proprietario" ||
-            value === "Altro CMS"
+            value === "⚙️ CMS Proprietario" ||
+            value === "❓ Altro CMS / Marketplace"
         )
     ) {
 
@@ -146,7 +146,7 @@ function calculate() {
 
     if (
         answers.agg &&
-        answers.agg !== "Nessuno"
+        answers.agg !== "Nessuna"
     ) {
 
         solution = "API REST BRT";
@@ -157,7 +157,7 @@ function calculate() {
     }
 
     else if (
-        answers.cms === "CMS Proprietario"
+        answers.cms === "⚙️ CMS Proprietario"
     ) {
 
         solution = "API REST BRT";
@@ -169,12 +169,12 @@ function calculate() {
 
     else if (
         [
-            "WooCommerce",
-            "Shopify",
-            "Magento",
-            "Prestashop",
-            "Ebay"
-        ].includes(answers.cms)
+			"🛒 WooCommerce",
+			"🛒 Shopify",
+			"🛒 Magento",
+			"🛒 Prestashop",
+			"🏪 Ebay"
+		].includes(answers.cms)
     ) {
 
         solution = "EasySpedWeb";
