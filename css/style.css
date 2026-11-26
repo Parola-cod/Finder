@@ -442,3 +442,16 @@ ul{
     cursor:pointer;
 
 }
+.option-icon{
+
+    font-size:28px;
+
+    margin-bottom:8px;
+
+}
+
+.option-text{
+
+    font-weight:600;
+
+}
