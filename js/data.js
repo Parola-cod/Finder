@@ -14,7 +14,7 @@ const apiCompleta = [
     "Tracking",
     "Fermopoint",
     "PUDO",
-    "ORM",
+    "Pickup",
     "Notifiche",
     "Resi tramite API"
 ];
@@ -24,14 +24,17 @@ const apiCompleta = [
 ========================= */
 
 const aggregatoriPartner = [
+
     "ShippyPro",
     "Qapla",
     "Sendcloud",
-    "SpedizioniOnline",
+    "SpedisciOnline",
     "iSendu",
     "Smarty",
     "Poleepo",
+
     "Altro Aggregatore"
+
 ];
 
 /* =========================
@@ -45,28 +48,34 @@ const products = {
         desc: "Piattaforma ecommerce BRT.",
 
         features: [
-            "Tracking",
+
             "Import ordini",
             "Generazione etichette",
+            "Tracking",
             "Collection",
             "Fresh",
             "Fermopoint",
             "Direct2Shop"
+
         ]
+
     },
 
     "Plug&Ship": {
 
-        desc: "Soluzione dedicata a CMS e marketplace non gestiti tramite EasySpedWeb.",
+        desc: "Soluzione dedicata a CMS e marketplace non gestiti da EasySpedWeb.",
 
         features: [
+
             "Inserimento manuale",
             "Upload file",
             "Etichette",
             "Tracking",
             "Drop Shipping",
             "Report spedizioni"
+
         ]
+
     },
 
     "Return My Parcel": {
@@ -74,13 +83,16 @@ const products = {
         desc: "Gestione completa dei resi.",
 
         features: [
+
             "Portale Resi",
             "Etichetta di Reso",
             "Tracking Resi",
             "Dashboard",
             "Locker",
             "PUDO"
+
         ]
+
     }
 
 };
@@ -88,6 +100,7 @@ const products = {
 /* =========================
    CMS COMPATIBILI
 ========================= */
+
 const plugShipCMS = [
 
     {name:"Magento",logo:"img/logos/magento.png"},
@@ -111,9 +124,11 @@ const plugShipCMS = [
     {name:"Oxatis",logo:"img/logos/oxatis.png"}
 
 ];
+
 /* =========================
    MARKETPLACE
 ========================= */
+
 const plugShipMarketplace = [
 
     {name:"Amazon",logo:"img/logos/amazon.png"},
@@ -125,7 +140,6 @@ const plugShipMarketplace = [
     {name:"Etsy",logo:"img/logos/etsy.png"},
     {name:"Discogs",logo:"img/logos/discogs.png"},
     {name:"Octopia",logo:"img/logos/octopia.png"},
-
     {name:"3dCart",logo:"img/logos/3dcart.png"},
     {name:"Back Market",logo:"img/logos/backmarket.png"},
     {name:"Fnac Darty",logo:"img/logos/fnacdarty.png"},
@@ -133,21 +147,17 @@ const plugShipMarketplace = [
     {name:"Kaufland",logo:"img/logos/kaufland.png"},
     {name:"Bol",logo:"img/logos/bol.png"},
     {name:"OnBuy",logo:"img/logos/onbuy.png"},
-
     {name:"ManoMano",logo:"img/logos/manomano.png"},
     {name:"Carrefour",logo:"img/logos/carrefour.png"},
     {name:"Auchan",logo:"img/logos/auchan.png"},
     {name:"Conforama",logo:"img/logos/conforama.png"},
     {name:"Worten",logo:"img/logos/worten.png"},
-
     {name:"Decathlon",logo:"img/logos/decathlon.png"},
     {name:"Leroy Merlin",logo:"img/logos/leroymerlin.png"},
     {name:"MediaMarkt",logo:"img/logos/mediamarkt.png"},
-
     {name:"Rue du Commerce",logo:"img/logos/rueducommerce.png"},
     {name:"Showroom Privé",logo:"img/logos/showroomprivee.png"},
     {name:"El Corte Inglés",logo:"img/logos/elcorteingles.png"},
-
     {name:"Lengow",logo:"img/logos/lengow.png"},
     {name:"BeezUP",logo:"img/logos/beezup.png"},
     {name:"ChannelAdvisor",logo:"img/logos/channeladvisor.png"},
@@ -159,7 +169,6 @@ const plugShipMarketplace = [
     {name:"IBS Marketplace",logo:"img/logos/ibs.png"},
     {name:"eDock",logo:"img/logos/edock.png"},
     {name:"Maxpho",logo:"img/logos/maxpho.png"},
-
     {name:"Conrad",logo:"img/logos/conradelectronic.png"},
     {name:"Cdiscount",logo:"img/logos/cdiscount.png"},
     {name:"Eprice",logo:"img/logos/eprice.png"},
@@ -197,7 +206,7 @@ const questions = [
             "ShippyPro",
             "Qapla",
             "Sendcloud",
-            "SpedizioniOnline",
+            "SpedisciOnline",
             "iSendu",
             "Smarty",
             "Poleepo",
@@ -218,19 +227,20 @@ const questions = [
 
         options:[
 
-            "🛒 WooCommerce",
-            "🛒 Shopify",
-            "🛒 Magento",
-            "🛒 Prestashop",
+            "WooCommerce",
+            "Shopify",
+            "Magento",
+            "Prestashop",
 
-            "🏪 eBay",
-            "🏪 Amazon",
+            "eBay",
 
-            "❓ Altro CMS",
-            "❓ Altro Marketplace"
+            "Amazon",
+
+            "Altro CMS",
+
+            "Altro Marketplace"
 
         ]
-    },
-
+    }
 
 ];

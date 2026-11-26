@@ -1,6 +1,35 @@
 let current = 0;
 let answers = {};
 
+const optionIcons = {
+
+    "ShippyPro":"🚚",
+    "Qapla":"🚚",
+    "Sendcloud":"🚚",
+    "SpedisciOnline":"🚚",
+    "iSendu":"🚚",
+    "Smarty":"🚚",
+    "Poleepo":"🚚",
+
+    "Altro Aggregatore":"🚚",
+
+    "Gestionale Proprietario":"⚙️",
+
+    "Nessuna delle precedenti":"❓",
+
+    "WooCommerce":"🛒",
+    "Shopify":"🛍️",
+    "Magento":"🏬",
+    "Prestashop":"🛍️",
+
+    "eBay":"🏪",
+    "Amazon":"📦",
+
+    "Altro CMS":"⚙️",
+    "Altro Marketplace":"🌐"
+
+};
+
 /* =========================
    RETURN MY PARCEL
 ========================= */
@@ -77,17 +106,32 @@ function loadQuestion(){
 
     document.getElementById("answers").innerHTML =
 
-        options.map(opt =>
+       options.map(opt => {
 
-            `<button
-                class="option-btn"
-                onclick="choose('${opt}')">
+    const icon = optionIcons[opt] || "";
 
+    return `
+
+        <button
+            class="option-btn"
+            onclick="choose('${opt}')">
+
+            ${icon ? `
+                <div class="option-icon">
+                    ${icon}
+                </div>
+            ` : ""}
+
+            <div class="option-text">
                 ${opt}
+            </div>
 
-            </button>`
+        </button>
 
-        ).join("");
+    `;
+
+}).join("");
+
 }
 
 /* =========================
@@ -96,8 +140,7 @@ function loadQuestion(){
 
 function choose(value){
 
-    const key =
-        questions[current].key;
+    const key = questions[current].key;
 
     answers[key] = value;
 
@@ -106,27 +149,24 @@ function choose(value){
     if(current === 0){
 
         if(
-            value !== "Nessuna delle precedenti"
+            value === "Nessuna delle precedenti"
         ){
 
-            calculate();
+            current++;
+
+            loadQuestion();
 
             return;
         }
-    }
-
-    /* Ultima domanda */
-
-    if(current === questions.length - 1){
 
         calculate();
 
         return;
     }
 
-    current++;
+    /* Seconda domanda */
 
-    loadQuestion();
+    calculate();
 }
 
 /* =========================
