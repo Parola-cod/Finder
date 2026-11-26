@@ -1,15 +1,49 @@
-/* =========================
-   STATO APPLICAZIONE
-========================= */
-
 let current = 0;
 let answers = {};
 
 /* =========================
-   CARICAMENTO DOMANDA
+   RETURN MY PARCEL
 ========================= */
 
-function loadQuestion() {
+function toggleReturns(){
+
+    const container =
+        document.getElementById("returnsContainer");
+
+    const checked =
+        document.getElementById("resiCheck").checked;
+
+    if(!checked){
+
+        container.innerHTML = "";
+
+        return;
+    }
+
+    container.innerHTML = `
+
+        <div class="prod">
+
+            <h3>Return My Parcel</h3>
+
+            <p>
+                ${products["Return My Parcel"].desc}
+            </p>
+
+            ${createList(
+                products["Return My Parcel"].features
+            )}
+
+        </div>
+
+    `;
+}
+
+/* =========================
+   DOMANDE
+========================= */
+
+function loadQuestion(){
 
     document.getElementById("step").innerText =
         `Step ${current + 1} di ${questions.length}`;
@@ -20,8 +54,30 @@ function loadQuestion() {
     document.getElementById("q").innerText =
         questions[current].title;
 
+    if(current > 0){
+
+        document.getElementById("navigation").innerHTML =
+
+            `<button
+                class="back-btn"
+                onclick="goBack()">
+
+                ← Indietro
+
+            </button>`;
+
+    }
+    else{
+
+        document.getElementById("navigation").innerHTML = "";
+    }
+
+    const options =
+        questions[current].options;
+
     document.getElementById("answers").innerHTML =
-        questions[current].options.map(opt =>
+
+        options.map(opt =>
 
             `<button
                 class="option-btn"
@@ -35,43 +91,33 @@ function loadQuestion() {
 }
 
 /* =========================
-   GESTIONE RISPOSTA
+   RISPOSTA
 ========================= */
 
-function choose(value) {
+function choose(value){
 
-    answers[questions[current].key] = value;
+    const key =
+        questions[current].key;
 
-    // Aggregatore selezionato
-    if (current === 0 && value !== "Nessuna") {
+    answers[key] = value;
 
-        answers.cms = "N/A";
+    /* Prima domanda */
 
-        current = 2;
+    if(current === 0){
 
-        loadQuestion();
+        if(
+            value !== "Nessuna delle precedenti"
+        ){
 
-        return;
+            calculate();
+
+            return;
+        }
     }
 
-    // CMS Proprietario o Altro CMS
-    if (
-        current === 1 &&
-        (
-            value === "⚙️ CMS Proprietario" ||
-            value === "❓ Altro CMS / Marketplace"
-        )
-    ) {
+    /* Ultima domanda */
 
-        current = 2;
-
-        loadQuestion();
-
-        return;
-    }
-
-    // Ultima domanda
-    if (current === questions.length - 1) {
+    if(current === questions.length - 1){
 
         calculate();
 
@@ -84,21 +130,45 @@ function choose(value) {
 }
 
 /* =========================
+   INDIETRO
+========================= */
+
+function goBack(){
+
+    if(current === 0){
+        return;
+    }
+
+    current--;
+
+    loadQuestion();
+}
+
+/* =========================
    HELPERS
 ========================= */
 
-function createList(items) {
+function createList(items){
 
     return `
+
         <ul>
-            ${items.map(item => `<li>${item}</li>`).join("")}
+
+            ${items.map(item =>
+
+                `<li>${item}</li>`
+
+            ).join("")}
+
         </ul>
+
     `;
 }
 
-function createLogoGrid(items) {
+function createLogoGrid(items){
 
     return `
+
         <div class="partner-grid">
 
             ${items.map(item => `
@@ -109,242 +179,227 @@ function createLogoGrid(items) {
                         src="${item.logo}"
                         alt="${item.name}">
 
-                    <span>${item.name}</span>
+                    <span>
+                        ${item.name}
+                    </span>
 
                 </div>
 
             `).join("")}
 
         </div>
+
     `;
 }
 
 /* =========================
-   CALCOLO RISULTATO
+   RISULTATO
 ========================= */
 
-function calculate() {
+function calculate(){
 
     let solution = "";
-    let reason = "";
 
-    let apiFeatures = apiCompleta;
-    let apiNote = "";
+    let features = [];
 
-    // Aggregatori esterni
-    if (aggregatoriPartner.includes(answers.agg)) {
+    let note = "";
 
-        apiFeatures = apiAggregatore;
+    const scelta =
+        answers.solution;
 
-        apiNote =
-            "Per verificare la disponibilità di servizi aggiuntivi come Fermopoint, PUDO, Collection, Fresh, Direct2Shop, Return My Parcel e altri servizi avanzati è necessario contattare il supporto dell'aggregatore utilizzato.";
-    }
+    /* AGGREGATORI */
 
-    /* =========================
-       DECISIONE
-    ========================= */
-
-    if (
-        answers.agg &&
-        answers.agg !== "Nessuna"
-    ) {
+    if(
+        aggregatoriPartner.includes(scelta)
+    ){
 
         solution = "API REST BRT";
 
-        reason =
-            "Cliente dotato di aggregatore o gestionale.";
+        features =
+            apiAggregatore;
 
+        note =
+            "Per verificare la disponibilità di servizi aggiuntivi è necessario contattare il supporto dell’aggregatore utilizzato.";
     }
 
-    else if (
-        answers.cms === "⚙️ CMS Proprietario"
-    ) {
+    /* GESTIONALE */
+
+    else if(
+        scelta === "Gestionale Proprietario"
+    ){
 
         solution = "API REST BRT";
 
-        reason =
-            "CMS Proprietario.";
-
+        features =
+            apiCompleta;
     }
 
-    else if (
-        [
-			"🛒 WooCommerce",
-			"🛒 Shopify",
-			"🛒 Magento",
-			"🛒 Prestashop",
-			"🏪 Ebay"
-		].includes(answers.cms)
-    ) {
+    /* NESSUN SOFTWARE */
 
-        solution = "EasySpedWeb";
+    else{
 
-        reason =
-            "CMS supportato.";
+        switch(answers.platform){
 
+            case "WooCommerce":
+            case "Shopify":
+            case "Magento":
+            case "Prestashop":
+            case "eBay":
+
+                solution = "EasySpedWeb";
+
+                features =
+                    products["EasySpedWeb"].features;
+
+                break;
+
+            default:
+
+                solution = "Plug&Ship";
+
+                features =
+                    products["Plug&Ship"].features;
+        }
     }
-
-    else {
-
-        solution = "Plug&Ship";
-
-        reason =
-            "CMS non supportato da EasySpedWeb.";
-    }
-
-    /* =========================
-       HTML RISULTATO
-    ========================= */
 
     let html = `
-
-        <div class="product-header">
-
-    <span class="product-badge">
-        SOLUZIONE CONSIGLIATA
-    </span>
-
-    
-
-</div>
 
         <div class="grid">
 
             <div>
 
                 <div class="prod">
-<h2 class="solution-title">
-        ${solution}
-    </h2>
-                    
-    `;
 
-    /* =========================
-       API REST
-    ========================= */
+                    <h2>${solution}</h2>
 
-    if (solution === "API REST BRT") {
+                    <p>
 
-        html += `
+                        ${
+                            solution === "API REST BRT"
+                            ? "Integrazione tramite API BRT."
+                            : products[solution].desc
+                        }
 
-            <p>
-                Servizi Disponibili con  API BRT :
-            </p>
+                    </p>
 
-            ${createList(apiFeatures)}
+                    ${createList(features)}
 
-        `;
+                    ${
+                        solution !== "API REST BRT"
+                        ?
+                        `
+                        <div class="addon-section">
 
-        if (apiNote) {
+                            <h3>
+                                Servizi opzionali
+                            </h3>
 
-            html += `
+                            <label
+                                class="checkbox-container">
 
-                <div class="alert-note">
+                                <input
+                                    type="checkbox"
+                                    id="resiCheck"
+                                    onchange="toggleReturns()">
 
-                    <strong>Nota</strong><br>
+                                Gestione Resi
+                                (Return My Parcel)
 
-                    ${apiNote}
+                            </label>
+
+                        </div>
+
+                        <div id="returnsContainer">
+                        </div>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        note
+                        ?
+                        `
+                        <div class="alert-note">
+
+                            ${note}
+
+                        </div>
+                        `
+                        :
+                        ""
+                    }
 
                 </div>
 
-            `;
-        }
-    }
+            </div>
 
-    /* =========================
-       EASYSPEDWEB / PLUG&SHIP
-    ========================= */
+            <div>
 
-    else {
+                <div class="client-toolbar">
 
-        html += `
+                    <button
+                        class="btn btn-small"
+                        onclick="location.reload()">
 
-            <p>
-                ${products[solution].desc}
-            </p>
+                        Nuova Analisi
 
-            ${createList(
-                products[solution].features
-            )}
+                    </button>
 
-        `;
-    }
-
-    html += `
                 </div>
-    `;
 
-    /* =========================
-       RETURN MY PARCEL
-    ========================= */
+                <h3>Scheda Cliente</h3>
 
-    if (
-        answers.resi === "SI" &&
-        solution !== "API REST BRT"
-    ) {
+                <ul>
 
-        html += `
+                    <li>
 
-            <div class="prod">
+                        <strong>
+                            Soluzione attuale:
+                        </strong>
 
-                <h3>Return My Parcel</h3>
+                        ${answers.solution}
 
-                <p>
-                    ${products["Return My Parcel"].desc}
-                </p>
+                    </li>
 
-                ${createList(
-                    products["Return My Parcel"].features
-                )}
+                    ${
+                        answers.platform
+                        ?
+                        `
+                        <li>
 
-            </div>
+                            <strong>
+                                Piattaforma:
+                            </strong>
 
-        `;
-    }
+                            ${answers.platform}
 
-    html += `
-            </div>
+                        </li>
+                        `
+                        :
+                        ""
+                    }
 
-           <div>
+                </ul>
 
-    <div class="client-toolbar">
-
-        <button
-            class="btn btn-small"
-            onclick="location.reload()">
-
-            Nuova Analisi
-
-        </button>
-
-    </div>
-
-    <h3>Scheda Cliente</h3>
-
-    <ul>
-        <li>Aggregatore: ${answers.agg || "-"}</li>
-        <li>CMS: ${answers.cms || "-"}</li>
-        <li>Resi: ${answers.resi || "NO"}</li>
-    </ul>
-
-</div>
             </div>
 
         </div>
+
     `;
 
-    /* =========================
-       GALLERY PLUG&SHIP
-    ========================= */
+    /* PLUG&SHIP */
 
-    if (solution === "Plug&Ship") {
+    if(solution === "Plug&Ship"){
 
         html += `
 
             <div class="partner-section">
 
                 <h3 class="partner-title">
+
                     CMS Compatibili
+
                 </h3>
 
                 ${createLogoGrid(
@@ -352,7 +407,9 @@ function calculate() {
                 )}
 
                 <h3 class="partner-title">
+
                     Marketplace Compatibili
+
                 </h3>
 
                 ${createLogoGrid(
@@ -364,22 +421,23 @@ function calculate() {
         `;
     }
 
-    /* =========================
-       NUOVA ANALISI
-    ========================= */
+    document.getElementById("answers")
+        .style.display = "none";
 
-    
+    document.getElementById("navigation")
+        .style.display = "none";
 
-    document.getElementById("answers").style.display =
-        "none";
+    document.getElementById("q")
+        .style.display = "none";
 
-    document.getElementById("q").innerText = "";
+    document.getElementById("step")
+        .style.display = "none";
 
-    document.getElementById("bar").style.width =
-        "100%";
+    document.getElementById("bar")
+        .style.width = "100%";
 
-    document.getElementById("res").innerHTML =
-        html;
+    document.getElementById("res")
+        .innerHTML = html;
 
     document.getElementById("res")
         .classList.remove("hidden");
