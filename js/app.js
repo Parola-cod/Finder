@@ -9,6 +9,7 @@ const optionIcons = {
     "SpedisciOnline":"🚚",
     "iSendu":"🚚",
     "Smarty":"🚚",
+	"Gsped":"🚚",
     "Poleepo":"🚚",
 
     "Altro Aggregatore":"🚚",

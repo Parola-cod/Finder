@@ -14,7 +14,7 @@ const apiCompleta = [
     "Tracking",
     "Fermopoint",
     "PUDO",
-    "Pickup",
+    "ORM",
     "Notifiche",
     "Resi tramite API"
 ];
@@ -31,6 +31,7 @@ const aggregatoriPartner = [
     "SpedisciOnline",
     "iSendu",
     "Smarty",
+	"Gsped",
     "Poleepo",
 
     "Altro Aggregatore"
@@ -209,6 +210,7 @@ const questions = [
             "SpedisciOnline",
             "iSendu",
             "Smarty",
+			"Gsped",
             "Poleepo",
 
             "Altro Aggregatore",
